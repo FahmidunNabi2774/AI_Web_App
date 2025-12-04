@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Summarizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="AI Summarizer Logo" class="logo" />
+      <h1>AI Summarizer</h1>
+    </div>
+    <div class="auth-buttons">
+      {% if is_logged_in %}
+        <a href="{{ url_for('logout') }}" class="btn login-btn" >Logout</a>
+      {% else %}
+        <button class="btn login-btn" onclick="openModal('loginModal')">Login</button>
+        <button class="btn signup-btn" onclick="openModal('signupModal')">Sign Up</button>
+      {% endif %}
+    </div>
+  </header>
+
+<!-- Main Content -->
+<main>
+  <section class="summarizer-container">
+    <div style="text-align: center; max-width: 700px; margin: 3rem auto;">
+      {% if is_logged_in %}
+      <h2 style="font-size: 2.2rem; font-weight: 700; color: #222;">{{full_name}}, Here you can Convert PDF to DOC Instantly</h2>
+      {% else %}
+      <h2 style="font-size: 2.2rem; font-weight: 700; color: #222;">Convert PDF to DOC Instantly</h2>
+      {% endif %}
+      <p style="font-size: 1.1rem; color: #555; margin: 1rem 0;">
+        Upload your PDF document and convert it into a Word (DOCX) file seamlessly.
+      </p>
+
+      <form method="POST" action="{{ url_for('pdf_to_doc_convert') }}" enctype="multipart/form-data" style="margin-top: 2rem;">
+        <div style="border: 2px dashed #ccc; padding: 40px; border-radius: 10px;">
+          <i class="fas fa-file-upload" style="font-size: 2.5rem; color: #4a6bdf;"></i>
+          <p style="font-size: 1.2rem; margin: 1rem 0;">Drop pdf Document Here to Upload</p>
+          <input type="file" name="pdf_file" accept=".pdf" required style="margin-bottom: 1rem;" />
+          <br>
+          <button type="submit" class="summarize-btn">Download The Doc</button>
+          <p style="font-size: 0.85rem; color: #777; margin-top: 1rem;">
+            Up to 100 MB for PDF. Output will be in .docx format.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+    <!-- AI Tools Section -->
+    <section class="ai-tools-section">
+      <h2 style="text-align: center;">Explore All AI Tools Bundle</h2>
+      <div class="tools-grid">
+          <div class="tool-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>AI Summarizer</h3>
+          <p>Summarize Your Contents with AI in a simple step</p>
+          <a href="{{ url_for('Index') }}" class="btn tool-btn">Try Now</a>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>Cover Page Generator</h3>
+          <p>Create professional cover pages for your reports and assignments.</p>
+          <a href="{{ url_for('cover_page_form') }}" class="btn tool-btn">Try Now</a>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-chart-line"></i>
+          <h3>Sentiment Analysis</h3>
+          <p>Analyze the sentiment of your text content instantly.</p>
+          <a href="{{url_for('Sentiment_Analysis')}}" class="btn tool-btn">Try Now</a>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-volume-up"></i>
+          <h3>Text to Speech</h3>
+          <p>Convert written text into natural-sounding speech.</p>
+          <a href="{{ url_for('Text_To_Speech') }}" class="btn tool-btn">Try Now</a>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-language"></i>
+          <h3>Pdf to Doc</h3>
+          <p>Convert Your Pdfs in .docx format instantly</p>
+          <a href="{{url_for('pdf_to_doc_form')}}" class="btn tool-btn">Try Now</a>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-microphone"></i>
+          <h3>Speech to Text</h3>
+          <p>Convert spoken words into written text.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-robot"></i>
+          <h3>Chatbot</h3>
+          <p>Interact with our AI-powered conversational bot.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-edit"></i>
+          <h3>Grammar Checker</h3>
+          <p>Improve your writing with AI grammar suggestions.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>Content Generator</h3>
+          <p>Generate creative content for various purposes.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+      </div>
+    </section>
+
+<!-- Footer Section -->
+<footer>
+  <div class="footer-content">
+    <div class="developer-info">
+      <p>Developed by: <span>Fahmidun Nabi</span></p>
+      <p>Roll: <span>2110025</span></p>
+    </div>
+    <div class="social-links">
+      <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>&copy; 2023 AI Summarizer. All rights reserved.</p>
+  </div>
+</footer>
+
+{% if not is_logged_in %}
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content" style="max-width: 400px; margin: 80px auto; padding: 60px 60px; background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+    <span class="close" onclick="closeModal('loginModal')" style="position: absolute; top: 12px; right: 20px; font-size: 1.5rem; cursor: pointer;">&times;</span>
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Login to Your Account</h2>
+    <form method="POST" action="{{ url_for('Login') }}">
+      <div class="form-group" style="text-align: left;">
+        <label for="login-email">Email</label>
+        <input type="email" name="email" id="login-email" required />
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+        <label for="login-password">Password</label>
+        <input type="password" name="password" id="login-password" required />
+      </div>
+
+      <button type="submit" class="btn signup-btn" style="width: 100%; margin-top: 20px;">Login</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px; font-size: 0.95rem;">
+      Don't have an account? <a href="#" onclick="toggleModal('loginModal', 'signupModal')">Sign up here</a>
+    </p>
+  </div>
+</div>
+
+
+<!-- SIGNUP MODAL -->
+<div id="signupModal" class="modal">
+  <div class="modal-content" style="max-width: 400px; margin: 80px auto; padding: 60px 60px; background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+    <span class="close" onclick="closeModal('signupModal')" style="position: absolute; top: 12px; right: 20px; font-size: 1.5rem; cursor: pointer;">&times;</span>
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Create Your Account</h2>
+    <form method="POST" action="{{ url_for('Signup') }}">
+      <div class="form-group" style="text-align: left;">
+        <label for="signup-name">Full Name</label>
+        <input type="text" name="name" id="signup-name" required />
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+        <label for="signup-email">Email</label>
+        <input type="email" name="email" id="signup-email" required />
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+        <label for="signup-password">Password</label>
+        <input type="password" name="password" id="signup-password" required />
+      </div>
+
+      <button type="submit" class="btn signup-btn" style="width: 100%; margin-top: 20px;">Sign Up</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px; font-size: 0.95rem;">
+      Already have an account? <a href="#" onclick="toggleModal('signupModal', 'loginModal')">Login here</a>
+    </p>
+  </div>
+</div>
+{% endif %}
+
+</body>
+
+<script>
+  function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+    document.body.classList.add("blurred");
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+    document.body.classList.remove("blurred");
+  }
+
+  function toggleModal(currentId, targetId) {
+    closeModal(currentId);
+    openModal(targetId);
+  }
+
+  // Optional: Close modals if clicked outside of the modal box
+  window.onclick = function(event) {
+    const login = document.getElementById("loginModal");
+    const signup = document.getElementById("signupModal");
+    if (event.target === login) closeModal("loginModal");
+    if (event.target === signup) closeModal("signupModal");
+  };
+</script>
+
+</html>

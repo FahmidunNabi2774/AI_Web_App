@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Summarizer</title>
+  <link rel="stylesheet" href="{ url_for('static', filename='styles.css') }" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="AI Summarizer Logo" class="logo" />
+      <h1>AI Summarizer</h1>
+    </div>
+    <div class="auth-buttons">
+      <button class="btn login-btn">Login</button>
+      <button class="btn signup-btn">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="summarizer-container">
+      <div class="text-area-container">
+        <div class="input-container">
+          <h2>Input Text</h2>
+          <textarea
+            id="input-text"
+            placeholder="Paste your text here to summarize..."
+          ></textarea>
+
+          <div class="controls">
+            <div class="slider-container">
+              <label for="summary-length">Summary Length:</label>
+              <input
+                type="range"
+                id="summary-length"
+                min="10"
+                max="100"
+                value="50"
+              />
+              <span id="length-value">50%</span>
+            </div>
+
+            <div class="summary-type">
+              <span>Summary Type:</span>
+              <div class="toggle-container">
+                <button class="toggle-btn active" id="extractive-btn">
+                  Extractive
+                </button>
+                <button class="toggle-btn" id="abstractive-btn">
+                  Abstractive
+                </button>
+              </div>
+            </div>
+
+            <button class="btn summarize-btn">Summarize</button>
+          </div>
+        </div>
+
+        <div class="output-container">
+          <h2>Summary</h2>
+          <textarea
+            id="output-text"
+            placeholder="Your summary will appear here..."
+            readonly
+          ></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Tools Section -->
+    <section class="ai-tools-section">
+      <h2>Explore Other AI Tools</h2>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>Cover Page Generator</h3>
+          <p>Create professional cover pages for your reports and assignments.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-chart-line"></i>
+          <h3>Sentiment Analysis</h3>
+          <p>Analyze the sentiment of your text content instantly.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-volume-up"></i>
+          <h3>Text to Speech</h3>
+          <p>Convert written text into natural-sounding speech.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-language"></i>
+          <h3>Text Translation</h3>
+          <p>Translate text between multiple languages instantly.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-microphone"></i>
+          <h3>Speech to Text</h3>
+          <p>Convert spoken words into written text.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-robot"></i>
+          <h3>Chatbot</h3>
+          <p>Interact with our AI-powered conversational bot.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-edit"></i>
+          <h3>Grammar Checker</h3>
+          <p>Improve your writing with AI grammar suggestions.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>Content Generator</h3>
+          <p>Generate creative content for various purposes.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <div class="developer-info">
+        <p>Developed by: <span>Fahmidun Nabi</span></p>
+        <p>Roll: <span>2110025</span></p>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 AI Summarizer. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

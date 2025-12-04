@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up - AI Tools</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main style="max-width: 400px; margin: 80px auto; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Create Your Account</h2>
+    <form method="POST" action="{{ url_for('Signup') }}">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+      </div>
+
+      <button type="submit" class="btn signup-btn" style="width: 100%; margin-top: 20px;">Sign Up</button>
+    </form>
+
+    <div style="margin-top: 20px;">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    
+    <p style="text-align: center; margin-top: 15px; font-size: 0.95rem;">
+      Already have an account? <a href="{{ url_for('Login') }}">Login here</a>
+    </p>
+  </main>
+</body>
+</html>

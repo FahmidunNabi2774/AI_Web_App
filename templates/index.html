@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Summarizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="AI Summarizer Logo" class="logo" />
+      <h1>AI Summarizer</h1>
+    </div>
+    <div class="auth-buttons">
+      {% if is_logged_in %}
+        <a href="{{ url_for('logout') }}" class="btn login-btn" >Logout</a>
+      {% else %}
+        <button class="btn login-btn" onclick="openModal('loginModal')">Login</button>
+        <button class="btn signup-btn" onclick="openModal('signupModal')">Sign Up</button>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Welcome Section -->
+  <section class="welcome-section">
+    <h2>
+      {% if is_logged_in %}
+        👋 Welcome, {{ full_name }}!
+      {% else %}
+        👋 Welcome to AI Summarizer!
+      {% endif %}
+    </h2>
+    <p class="welcome-intro">
+      We’re glad to have you here! Our AI-powered tools are designed to help you work smarter and faster —
+      from summarizing long texts, creating cover pages, converting PDFs, to analyzing sentiment and more.
+    </p>
+
+    <div class="welcome-cards">
+      <div class="welcome-card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>How to Get Started</h3>
+        <p>Choose a tool from the menu above, follow the simple instructions, and let our AI do the heavy lifting.</p>
+      </div>
+      <div class="welcome-card">
+        <i class="fas fa-cogs"></i>
+        <h3>What We Offer</h3>
+        <p>Summarization, grammar checks, sentiment analysis, PDF↔DOC, chatbot, and more — all in one place.</p>
+      </div>
+      <div class="welcome-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Why Choose Us</h3>
+        <p>Fast, accurate, and privacy-minded tools that save you time and effort.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <section class="summarizer-container">
+      <div class="text-area-container">
+        <div class="input-container">
+          <h2>Input Text</h2>
+
+          <!-- ✅ This form now POSTS to your Index route -->
+          <form method="POST" action="{{ url_for('Index') }}">
+            <textarea id="input-text" name="data" placeholder="Paste your text here to summarize..."></textarea>
+
+            <div class="controls">
+              <div class="slider-container">
+                <label for="summary-length">Summary Length:</label>
+                <!-- ✅ name matches your app.py (maxL). 10–200 words/chars depending on your use -->
+                <input type="range" min="20" max="1000" name="maxL" value="1000">
+              </div>
+              <button class="btn summarize-btn" type="submit">Summarize</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="output-container">
+          <h2>Summary</h2>
+          <textarea id="output-text" placeholder="Your summary will appear here..." readonly>{{ result or "Summary not available" }}</textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- AI Tools Section -->
+  <section class="ai-tools-section">
+    <h2 style="text-align: center;">Explore All AI Tools Bundle</h2>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <i class="fas fa-file-alt"></i>
+        <h3>AI Summarizer</h3>
+        <p>Summarize Your Contents with AI in a simple step</p>
+        <a href="{{ url_for('Index') }}" class="btn tool-btn">Try Now</a>
+      </div>
+      <div class="tool-card">
+        <i class="fas fa-file-alt"></i>
+        <h3>Cover Page Generator</h3>
+        <p>Create professional cover pages for your reports and assignments.</p>
+        <a href="{{ url_for('cover_page_form') }}" class="btn tool-btn">Try Now</a>
+      </div>
+      <div class="tool-card">
+        <i class="fas fa-chart-line"></i>
+        <h3>Sentiment Analysis</h3>
+        <p>Analyze the sentiment of your text content instantly.</p>
+        <a href="{{ url_for('Sentiment_Analysis') }}" class="btn tool-btn">Try Now</a>
+      </div>
+      <div class="tool-card">
+        <i class="fas fa-volume-up"></i>
+        <h3>Text to Speech</h3>
+        <p>Convert written text into natural-sounding speech.</p>
+        <a href="{{ url_for('Text_To_Speech') }}" class="btn tool-btn">Try Now</a>
+      </div>
+      <div class="tool-card">
+        <i class="fas fa-language"></i>
+        <h3>Pdf to Doc</h3>
+        <p>Convert Your Pdfs in .docx format instantly</p>
+        <a href="{{ url_for('pdf_to_doc_form') }}" class="btn tool-btn">Try Now</a>
+      </div>
+<div class="tool-card">
+          <i class="fas fa-microphone"></i>
+          <h3>Speech to Text</h3>
+          <p>Convert spoken words into written text.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-robot"></i>
+          <h3>Chatbot</h3>
+          <p>Interact with our AI-powered conversational bot.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-edit"></i>
+          <h3>Grammar Checker</h3>
+          <p>Improve your writing with AI grammar suggestions.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+        <div class="tool-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>Content Generator</h3>
+          <p>Generate creative content for various purposes.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+                <div class="tool-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>AI modifier</h3>
+          <p>Text and Summarizer Modifier.</p>
+          <button class="btn tool-btn">Try Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <div class="developer-info">
+        <p>Developed by: <span>Fahmidun Nabi</span></p>
+        <p>Roll: <span>2110025</span></p>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 AI Summarizer. All rights reserved.</p>
+    </div>
+  </footer>
+
+{% if not is_logged_in %}
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content" style="max-width: 400px; margin: 80px auto; padding: 60px 60px; background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+    <span class="close" onclick="closeModal('loginModal')" style="position: absolute; top: 12px; right: 20px; font-size: 1.5rem; cursor: pointer;">&times;</span>
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Login to Your Account</h2>
+    <form method="POST" action="{{ url_for('Login') }}">
+      <div class="form-group" style="text-align: left;">
+        <label for="login-email">Email</label>
+        <input type="email" name="email" id="login-email" required />
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+        <label for="login-password">Password</label>
+        <input type="password" name="password" id="login-password" required />
+      </div>
+
+      <button type="submit" class="btn signup-btn" style="width: 100%; margin-top: 20px;">Login</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px; font-size: 0.95rem;">
+      Don't have an account? <a href="#" onclick="toggleModal('loginModal', 'signupModal')">Sign up here</a>
+    </p>
+  </div>
+</div>
+
+
+<!-- SIGNUP MODAL -->
+<div id="signupModal" class="modal">
+  <div class="modal-content" style="max-width: 400px; margin: 80px auto; padding: 60px 60px; background: white; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+    <span class="close" onclick="closeModal('signupModal')" style="position: absolute; top: 12px; right: 20px; font-size: 1.5rem; cursor: pointer;">&times;</span>
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Create Your Account</h2>
+    <form method="POST" action="{{ url_for('Signup') }}">
+      <div class="form-group" style="text-align: left;">
+        <label for="signup-name">Full Name</label>
+        <input type="text" name="name" id="signup-name" required />
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+        <label for="signup-email">Email</label>
+        <input type="email" name="email" id="signup-email" required />
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+        <label for="signup-password">Password</label>
+        <input type="password" name="password" id="signup-password" required />
+      </div>
+
+      <button type="submit" class="btn signup-btn" style="width: 100%; margin-top: 20px;">Sign Up</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px; font-size: 0.95rem;">
+      Already have an account? <a href="#" onclick="toggleModal('signupModal', 'loginModal')">Login here</a>
+    </p>
+  </div>
+</div>
+{% endif %}
+
+  <!-- Scripts -->
+<script>
+    // slider % display
+    const len = document.getElementById('summary-length');
+    const lbl = document.getElementById('length-value');
+    if(len && lbl){
+      len.addEventListener('input', ()=> { lbl.textContent = len.value; });
+    }
+
+  function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+    document.body.classList.add("blurred");
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+    document.body.classList.remove("blurred");
+  }
+
+  function toggleModal(currentId, targetId) {
+    closeModal(currentId);
+    openModal(targetId);
+  }
+
+  // Optional: Close modals if clicked outside of the modal box
+  window.onclick = function(event) {
+    const login = document.getElementById("loginModal");
+    const signup = document.getElementById("signupModal");
+    if (event.target === login) closeModal("loginModal");
+    if (event.target === signup) closeModal("signupModal");
+  };
+
+    // signup AJAX -> auto-login on server -> reload to show greeting
+    document.addEventListener("DOMContentLoaded", function () {
+      const signupForm = document.getElementById("signupForm");
+      const signupBtn  = document.getElementById("signupBtn");
+      if(!signupForm || !signupBtn) return;
+
+      signupBtn.addEventListener("click", function () {
+        const formData = new FormData(signupForm);
+        fetch("/signup", { method: "POST", body: formData })
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === "exists") {
+              alert("⚠️ Email already exists. Please log in.");
+              toggleModal('signupModal','loginModal');
+            } else if (data.status === "success") {
+              // server sets session; just reload UI to show "Hi, Full Name"
+              window.location.reload();
+            } else {
+              alert("Signup failed.");
+            }
+          })
+          .catch(() => alert("Something went wrong."));
+      });
+    });
+</script>
+</body>
+</html>

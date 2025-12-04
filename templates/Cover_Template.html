@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cover Page</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      text-align: center;
+      padding: 60px;
+      line-height: 1.8;
+      font-size: 20px;
+      color: #111;
+    }
+
+    .slogan {
+      font-style: italic;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .university {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      margin: 30px auto;
+      height: 180px;
+      width: 180px;
+    }
+
+    .dept {
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-bottom: 50px;
+    }
+
+    .details {
+      text-align: left;
+      margin: 0 auto;
+      max-width: 600px;
+      font-size: 19px;
+      margin-bottom: 60px;
+    }
+
+    .details p {
+      margin: 8px 0;
+    }
+
+    .submitted-section {
+      display: flex;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      font-size: 19px;
+    }
+
+    .submitted-section p {
+      margin: 6px 0;
+    }
+
+    .submitted-to {
+      flex: 1;
+    }
+
+    .submitted-by {
+      flex: 1;
+      text-align: right;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slogan">“Heaven’s Light is Our Guide”</div>
+  <div class="university">Rajshahi University of Engineering & Technology, Rajshahi</div>
+
+  <img src="C:/3-1 Semester/Software Project/AI Web APP/static/Ruet_Logo.png" alt="RUET Logo" class="logo" />
+
+  <div class="dept">Department of Electrical & Computer Engineering (ECE-3112)</div>
+
+  <div class="details">
+    <p>Course Code: {{ Course_Code }}</p>
+    <p>Course Title: {{ Course_Title }}</p>
+    <p>Lab Report: {{ Lab_Report_No }}</p>
+    <p>Date of Submission: {{ Submission_Date }}</p>
+  </div>
+
+  <div class="submitted-section">
+    <div class="submitted-to">
+      <p class="italic">Submitted To,</p>
+      <p class="bold">{{ Teacher_Name }}</p>
+      <p>{{ Teacher_Designation }}</p>
+      <p>Dept. Of {{ Dept_Name }}, RUET</p>
+    </div>
+    <div class="submitted-by">
+      <p class="italic">Submitted By,</p>
+      <p>Name: {{ Student_Name }}</p>
+      <p>Roll: {{ Student_Roll }}</p>
+      <p>Session: {{ Student_Session }}</p>
+    </div>
+  </div>
+
+</body>
+</html>
